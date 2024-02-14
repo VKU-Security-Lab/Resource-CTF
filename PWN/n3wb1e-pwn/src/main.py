@@ -111,7 +111,7 @@ def main():
     question_6()
     question_7()
     print("Congratulations! You have completed the challenge.")
-    print("Flag: VSL{w3lc0m3_t0_th3_w0rld_0f_pwn1ng!}")
+    print("Flag: " + open("flag.txt").read())
     
 if __name__ == "__main__":
     main()
