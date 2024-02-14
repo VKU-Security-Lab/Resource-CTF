@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">simpleCalculator</string>
+    <integer name="secret">2092024</integer>
+    <string name="hash">727d77617c7a774c606766777a7c4c7e7277764c677b7a604c742356255e707224432070745b5226</string>
+</resources>

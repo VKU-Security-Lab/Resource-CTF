@@ -1,0 +1,7 @@
+version: '3'
+
+services:
+  log-machine:
+    build: .
+    ports:
+      - "10005:1337"
