@@ -1,0 +1,1 @@
+FLAG = b"VSL{y0u_4r3_4nc13nt_4nd_4w3s0m3}"

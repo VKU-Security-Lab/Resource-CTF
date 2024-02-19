@@ -1,0 +1,8 @@
+{
+    "files.associations": {
+        "stdio.h": "c",
+        "system_error": "c",
+        "charconv": "c",
+        "xmemory": "c"
+    }
+}
